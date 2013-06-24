@@ -1,0 +1,46 @@
+
+div.canvasBox{
+    border:1px solid white;
+    height:602px;
+    width:1202px;
+    color: white;
+}
+div.title{
+    font-family:ethnocentric;
+    color:orange;
+    font-size: 50px;
+}
+div.connectionInformation{
+    color: white;
+    width: 50%;
+    height: 50%;
+    margin: 0px auto;
+    margin-top:20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+input.textInput{
+    border-radius: 2px;
+    background-color:gray;
+    border:1px solid #c9c9c9;
+    font-family: sans-serif;
+    font-weight: bold;
+    /*margin:1px;*/
+    padding:3px;
+}
+input.shipColor{
+    display:none;
+}
+div.inputRow{
+    margin:4px;
+}
+img{
+    border-radius: 3px;
+}
+img.highlight{
+    background-color: orange;
+}
+body{
+    background-color: black;
+}
