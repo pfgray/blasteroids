@@ -25,14 +25,20 @@ requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestat
     var app = express();
     var server = http.createServer(app);
     var io = require('socket.io').listen(server, {log: false});
-    var GAMESTATE_HEARTBEAT_INTERVAL = 5;//in ms
-
+    
     var path = require('path');
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.bodyParser());
+    var gameController = require('gameController.js')(app, io);//(app);
+    console.log(JSON.stringify(gameController));
+
+    var GAMESTATE_HEARTBEAT_INTERVAL = 5;//in ms
+
+    
     app.get('/', function(req, res) {
-        res.sendfile('public/index.html');
+        res.sendfile('views/index.html');
     });
+    
     app.post('/', function(req, res) {
         console.log("New request to join received:");
         console.log("    username: " + req.body.username);
@@ -47,7 +53,7 @@ requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestat
         shipTokenMap[id] = ship;
 
         //send them back the token!
-        fs.readFile('public/game.html', 'utf8', function(err, data) {
+        fs.readFile('views/game.html', 'utf8', function(err, data) {
             if (err) {
                 return console.log(err);
             } else {
@@ -55,37 +61,11 @@ requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestat
             }
         });
     });
+    
     server.listen(1337);
-
 
     //game
     var gameState = new GameState();
-    io.sockets.on('connection', function(socket) {
-        var ship = null;
-        setInterval(function() {
-            socket.emit('game', gameState.getInfo());
-        }, GAMESTATE_HEARTBEAT_INTERVAL);
-        socket.on('join', function(data) {
-            console.log('recieved token:' + JSON.stringify(data.token));
-            console.log("checking map: " + JSON.stringify(shipTokenMap));
-            console.log('recieved join token for:' + shipTokenMap[data.token].name);
-            ship = shipTokenMap[data.token];
-            gameState.addShip(ship);
-        });
-        socket.on('action', function(data) {
-            var action = {player: ship.name, data: data.data};
-            gameState.processAction(action);
-        });
-    });
-    var then = new Date();
-    var update = function() {
-        var now = new Date();
-        var modifier = ((now - then) / 1000);
-        gameState.update(modifier);
-        then = now;
-    };
-
-    setInterval(update, 1);
 
 });
 

@@ -44,13 +44,13 @@ define(["./point", "jquery"], function(Point, $) {
     
         this.contains = function(point){
             
-            console.log("checking if point: " + JSON.stringify(point) + " is located near ship with location: " + JSON.stringify(this.location) );
+            //console.log("checking if point: " + JSON.stringify(point) + " is located near ship with location: " + JSON.stringify(this.location) );
             
             //this is checking based on radius: if this passes, then we'll check the actual hitbox, but if not, we know it's not anywhere near here
             if(Math.sqrt(Math.pow(point.x-this.location.x, 2)+Math.pow(point.y-this.location.y, 2)) > this.radius){
                 return false;
             }
-            console.log("got past the radius check! ");
+            //console.log("got past the radius check! ");
         
             var vertices = this.getAllSides();
             var sign = 0;
@@ -64,7 +64,7 @@ define(["./point", "jquery"], function(Point, $) {
                 if (sign === 0){ //the first case
                     sign = cross_product ;
                 }else if(cross_product !== sign){
-                    console.log("cross product:   >" + cross_product + "!=" + sign + "<    :sign");
+                    //console.log("cross product:   >" + cross_product + "!=" + sign + "<    :sign");
                     return false;
                 }
             }
@@ -76,7 +76,7 @@ define(["./point", "jquery"], function(Point, $) {
         };
 
         this.draw = function(context){
-            console.log("drawing polygon for points: " + this.points);
+            //console.log("drawing polygon for points: " + this.points);
             context.save();
             //context.translate(this.location.x,this.location.y);
             //context.rotate(this.angle);

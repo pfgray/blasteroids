@@ -56,13 +56,23 @@ define(["./point", "./polygon", "./bullet", "jquery"], function(Point, Polygon, 
         
             var bulletCount = this.bullets.length;
             for(var i=0; i< bulletCount; i++){
-                this.bullets[i].draw(context);
+                this.bullets[i].draw(context, Images.ships[this.image].color);
             }
             
-            context.fillStyle = this.color;
-            context.font = "10px Arial";
-            context.fillText(this.name, this.x - (this.image.width/2), this.y - (this.image.height/2)-6);
+            
             this.shape.draw(context);
+            //console.log("drawing name: ");
+            
+            context.save();
+            context.fillStyle = Images.ships[this.image].color;
+            context.font = "10pt sans";
+            //context.fillText("poop", 200, 500);
+            var x = this.x - (Images.ships.shipDEAD.normal.width/2);
+            var y = this.y - (Images.ships.shipDEAD.normal.height/2)-6;
+            context.fillText(this.name, x, y);
+            
+            context.restore();
+            //console.log("done drawing name!");
         };
     
         this.getStatsInfo = function(){
@@ -216,8 +226,9 @@ define(["./point", "./polygon", "./bullet", "jquery"], function(Point, Polygon, 
             this.angle = info.angle;
             this.shape.update(info.angle, new Point(info.x, info.y));
             self.bullets = new Array();
+            //console.log("setting bullets from: " + JSON.stringify(info.bullets));
             $.each(info.bullets, function(index, value){
-                self.bullets[index] = new Bullet(value.x, value.y);
+                self.bullets[index] = new Bullet(value.x, value.y, value.angle);
             });
         };
         this.getInfo = function(){

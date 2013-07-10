@@ -5,7 +5,6 @@ define(["./point"], function(Point) {
         this.angle = theta;
         this.speed = 2000;//pixels per second
         this.size = 4;
-        this.color = color;
 			
         this.update = function(seconds){
             //move in the direction of the angle
@@ -14,6 +13,8 @@ define(["./point"], function(Point) {
 		
             this.x = this.x + dx;
             this.y = this.y + dy;
+            
+            //console.log("updated the bullet to be at: (" + this.x + ", " + this.y + ").");
         //point,angle,length
         };
         this.remove = function(width, height){
@@ -25,13 +26,13 @@ define(["./point"], function(Point) {
             }
         };
 	
-        this.draw = function(context){
-            console.log("drawing bullet!");
+        this.draw = function(context, color){
+            //console.log("drawing bullet!");
             //also turned at the correct angle
             context.save();
             context.translate(this.x,this.y);
             context.rotate(this.angle);
-            context.fillStyle = this.color;
+            context.fillStyle = color;
             context.fillRect(-this.size/2, -this.size/2, this.size, this.size);
             context.restore();
         };
@@ -42,11 +43,14 @@ define(["./point"], function(Point) {
                 angle:this.angle
             };
         };
+        /*
         this.setInfo = function(info){
             this.x = info.x;
             this.y = info.y;
+            //console.log("setting the bullet to be at: (" + this.x + ", " + this.y + ").");
             this.angle= info.angle;
         };
+        */
         this.getLocation = function(){
             return new Point(this.x, this.y);
         }

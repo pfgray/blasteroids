@@ -2,15 +2,28 @@
 <html>
     <head>
         <title>Blasteroids!</title>
-        <link rel="stylesheet" href="style/blasteroids.css"/>
-        <link rel="stylesheet" href="style/index.css"/>
-        <script data-main="script/index" src="script/require-jquery.js"></script>
+        <link rel="stylesheet" href="/style/blasteroids.css"/>
+        <link rel="stylesheet" href="/style/index.css"/>
+        <script data-main="script/index" src="/script/require-jquery.js"></script>
+        <style>
+            .gamesButton{margin-top: 10px;}
+        </style>
     </head>
     <body>
+        <div class="header">
+            <div class="title">BLASTEROIDS</div>
+        </div>
+        <div class="content">
+            <span class="section_header">What is Blasteroids?</span>
+            <span class="section_text">-Blasteroids is a multliplayer space shooter. It runs on HTML5 and the canvas API, communicating on WebSockets.</span>
+            <span class="section_header">How do I play?</span>
+            <span class="section_text">-press up to go forward, left & right to turn, and down to shoot!</span><br/>
+            <a href="/games" class="accentButton gamesButton">View Games</a>
+        </div>
+        <!--
         <div id ="canvasBox" class="canvasBox">
             <div id="connectionInformation" class="connectionInformation">
                 <form method="POST">
-                    <div class="title">BLASTEROIDS</div>
                     <div class="inputRow">username: <input class="textInput" name="username" id="username" type="text" value="InsertNameHere"/></div>
                     <div class="inputRow">
                         <div id="shipOptions">
@@ -26,5 +39,6 @@
                 </form>
             </div>
         </div>
+        -->
     </body>
 </html>

@@ -2,3 +2,51 @@
     font-family: ethnocentric;
     src: url('../fonts/ethnocentric.ttf');
 }
+@font-face {
+    font-family: dimis;
+    src: url('../fonts/dimis.ttf');
+}
+@font-face {
+    font-family: dimitri;
+    src: url('../fonts/dimitri.ttf');
+}
+@font-face {
+    font-family: coolvetica;
+    src: url('../fonts/coolvetica.ttf');
+}
+
+
+
+.accentButton, .accentButton:visited {
+    display: inline-block; 
+    padding: 5px; 
+    color: #000; 
+    text-decoration: none;
+    border-radius: 6px;
+    -moz-border-radius: 6px; 
+    -webkit-border-radius: 6px;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    cursor: pointer;
+    background-color:#E0FF0D;
+    border:none;
+    font-family:dimis;
+    font-size:20px;
+
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E0FF0D), to(#b4cd0f));
+
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #E0FF0D, #b4cd0f);
+
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #E0FF0D, #b4cd0f);
+
+    /* IE 10 */
+    background: -ms-linear-gradient(top, #E0FF0D, #b4cd0f);
+
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(top, #E0FF0D, #b4cd0f);
+}
+

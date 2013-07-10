@@ -16,17 +16,35 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         "use strict";
 
         // I'll have to add the hostname to a template eventually \/
-        var socket = io.connect('http://localhost');
+        var socket = io.connect('http://192.168.1.101');
 
         //send the token back to the server to redeem it and to begin sending actions back to the server!
-        socket.emit('join', {
-            'token': ship_token
+        //socket.emit('join', {
+        //    'token': ship_token
+        //});
+
+        $('#joinGame').click(function() {
+            //get the name and the ship color, and emit it on the socket!
+            var name = $('#name').val();
+            var shipColor = $('input[name=shipColor]:checked').val();
+            socket.emit('join', {
+                'name': name, 
+                'shipColor': shipColor
+            });
         });
-        
+
+        socket.emit('watch', {
+            'name': game_name
+        });
+
         // whenever we recieve the gameInfo object, we want to apply it to our local gamestate, so we can draw it
         socket.on('game', function(data) {
             gameState.setInfo(data);
-            //console.log(data);
+            console.log(data);
+        });
+        
+        socket.on('drop', function(data) {
+            delete gameState.ships[data.name];
         });
 
         addEventListener("keydown", function(e) {
@@ -36,7 +54,7 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
             } else if (controls[e.keyCode] === 'respawn') {
                 actionText = 'respawn';
             } else if (controls[e.keyCode] === 'accelerate') {
-                    actionText = 'accelerate';
+                actionText = 'accelerate';
             } else if (controls[e.keyCode] === 'left') {
                 actionText = 'turnLeft';
             } else if (controls[e.keyCode] === 'right') {
@@ -105,11 +123,27 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         }
     };
 
+    var then = new Date();
+    var update = function() {
+        var now = new Date();
+        var modifier = ((now - then) / 1000);
+        $.each(objects, function(index, value) {
+            value.update(modifier);
+        });
+        then = now;
+    };
+
     for (var i = 0; i < 100; i++) {
         objects.push(new Star(canvas.width, canvas.height));
     }
 
-    setInterval(drawGame, 1);
+    function main() {
+        update();
+        drawGame();
+    }
+
+    setInterval(main, 1);
+
 
     var drawStats = function(context) {
         var location = {
