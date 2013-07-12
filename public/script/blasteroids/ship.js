@@ -15,7 +15,7 @@ define(["./point", "./polygon", "./bullet", "jquery"], function(Point, Polygon, 
         this.color = color; //server
         this.velocityLimit = 500; //pixels per second
         this.acceleration = 1000; //pixels per second^2
-        this.deceleration = -0.2;
+        this.deceleration = -0.5;
         this.turnSpeed=20;
         this.image = image;
     
@@ -33,6 +33,13 @@ define(["./point", "./polygon", "./bullet", "jquery"], function(Point, Polygon, 
         this.y = Math.floor((Math.random()*canvasSize.height)+1);
         this.angle = theta; //server
         this.bullets = new Array();
+
+        //smoke stuff
+        this.smokes = new Array();
+        this.timeSinceLastSmoke = 0;
+        this.smokeInterval =.000000000005;
+        this.smokeDensity = 3;
+
     
         this.shape = new Polygon(this.x,this.y, this.angle, new Array(
             new Point(-18, 30),
@@ -46,7 +53,8 @@ define(["./point", "./polygon", "./bullet", "jquery"], function(Point, Polygon, 
             context.translate(this.x,this.y);
             context.rotate(this.angle);
             if(this.dead){
-                context.drawImage(Images.ships.shipDEAD.normal, -Images.ships.shipDEAD.normal.width/2, -Images.ships.shipDEAD.normal.height/2);
+                //context.drawImage(Images.ships.shipDEAD.normal, -Images.ships.shipDEAD.normal.width/2, -Images.ships.shipDEAD.normal.height/2);
+                context.drawImage(Images.ships[this.image].normal, -Images.ships[this.image].normal.width/2, -Images.ships[this.image].normal.height/2);
             }else if(!this.accelerating){
                 context.drawImage(Images.ships[this.image].normal, -Images.ships[this.image].normal.width/2, -Images.ships[this.image].normal.height/2);
             }else{
@@ -59,9 +67,8 @@ define(["./point", "./polygon", "./bullet", "jquery"], function(Point, Polygon, 
                 this.bullets[i].draw(context, Images.ships[this.image].color);
             }
             
-            
-            this.shape.draw(context);
-            //console.log("drawing name: ");
+            //  \/make this configurable\/
+            //this.shape.draw(context);
             
             context.save();
             context.fillStyle = Images.ships[this.image].color;
@@ -184,6 +191,9 @@ define(["./point", "./polygon", "./bullet", "jquery"], function(Point, Polygon, 
                 if (this.turningRight) { // Player holding right
                     this.turnRight(modifier);
                 }
+            }else{
+                this.angle += 10*modifier;
+                this.decelerate(modifier);
             }
 
             this.x += this.velocity.x*modifier;

@@ -1,5 +1,5 @@
 
-require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blasteroids/images', 'jquery'], function(GameState, Ship, Star, Images, $) {
+require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blasteroids/images', 'jquery', 'blasteroids/smokeparticle'], function(GameState, Ship, Star, Images, $, SmokeParticle) {
 
     var controls = {
         40: 'shoot',
@@ -15,8 +15,7 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
     $(function() {
         "use strict";
 
-        // I'll have to add the hostname to a template eventually \/
-        var socket = io.connect('http://192.168.1.101');
+        var socket = io.connect('http://'+hostname);
 
         //send the token back to the server to redeem it and to begin sending actions back to the server!
         //socket.emit('join', {
@@ -40,7 +39,7 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         // whenever we recieve the gameInfo object, we want to apply it to our local gamestate, so we can draw it
         socket.on('game', function(data) {
             gameState.setInfo(data);
-            console.log(data);
+            //console.log(data);
         });
         
         socket.on('drop', function(data) {
@@ -117,11 +116,24 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         $.each(objects, function(index, value) {
             value.draw(ctx);
         });
+
+        
+        var smokeCount = smokes.length;
         gameState.draw(ctx, Images);
+        for(var i=0; i< smokeCount; i++){
+            smokes[i].draw(ctx);
+        }
         if (keysDown['viewStats']) {
             drawStats(ctx);
-        }
+        }        
     };
+
+
+    //start the smoke stuff:
+    var smokes = new Array();
+    var timeSinceLastSmoke = 0;
+    var smokeInterval =.000000000005;
+    var smokeDensity = 3;
 
     var then = new Date();
     var update = function() {
@@ -130,6 +142,27 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         $.each(objects, function(index, value) {
             value.update(modifier);
         });
+
+        $.each(gameState.ships, function(key, value) {
+            if(value.dead == true){
+                if(timeSinceLastSmoke - modifier > smokeInterval){
+                    //randomize x to be within the width/height
+                    for(var i=0; i<smokeDensity; i++){
+                        var x =  Math.floor((Math.random()*(Images.ships.shipDEAD.normal.width/2))+1);
+                        var y =  Math.floor((Math.random()*(Images.ships.shipDEAD.normal.height/2))+1);
+                        smokes.push(new SmokeParticle(value.x-Images.ships.shipDEAD.normal.width/2 + x, value.y-Images.ships.shipDEAD.normal.width/2 + y));
+                    }
+                    timeSinceLastSmoke = 0;
+                }else{
+                    timeSinceLastSmoke  += modifier;
+                }
+            }
+        });
+        var smokeCount = smokes.length;
+        for(var i=0; i< smokeCount; i++){
+            smokes[i].update(modifier);
+        }
+
         then = now;
     };
 

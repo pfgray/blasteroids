@@ -2,7 +2,7 @@
 
 var requirejs = require('requirejs');
 var Mustache = require('mustache');
-
+var config = require('config')
 
 
 function makeid() {
@@ -29,7 +29,7 @@ requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestat
     var path = require('path');
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.bodyParser());
-    var gameController = require('gameController.js')(app, io);//(app);
+    var gameController = require('gameController.js')(app, io, config);//(app);
     console.log(JSON.stringify(gameController));
 
     var GAMESTATE_HEARTBEAT_INTERVAL = 5;//in ms
@@ -38,7 +38,7 @@ requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestat
     app.get('/', function(req, res) {
         res.sendfile('views/index.html');
     });
-    
+    /*
     app.post('/', function(req, res) {
         console.log("New request to join received:");
         console.log("    username: " + req.body.username);
@@ -61,8 +61,9 @@ requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestat
             }
         });
     });
+*/
     
-    server.listen(1337);
+    server.listen(config.host.port);
 
     //game
     var gameState = new GameState();
