@@ -21,8 +21,11 @@ Step 10. find friends to play against so you're not lonely
 
 TODO:
 -----
-[ ] Make viewing the hitboxes an option for the players
-[ ] Reject duplicate usernames nicely  
-[ ] fix the score screen  
-[x] fix collision detection  
+- [ ] Make viewing the hitboxes an option for the players
+- [ ] chat feature with other players
+- [ ] make "games" have a limit of certain score
+- [ ] add a laser-sight when players hold "shift" so they can aim easier
+- [ ] Reject duplicate usernames nicely  
+- [ ] fix the score screen  
+- [x] fix collision detection  
 
