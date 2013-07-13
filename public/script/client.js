@@ -1,5 +1,5 @@
 
-require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blasteroids/images', 'jquery', 'blasteroids/smokeparticle'], function(GameState, Ship, Star, Images, $, SmokeParticle) {
+require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blasteroids/images', 'jquery', 'blasteroids/smokeparticle', 'blasteroids/messagequeue'], function(GameState, Ship, Star, Images, $, SmokeParticle, MessageQueue) {
 
     var controls = {
         40: 'shoot',
@@ -40,6 +40,22 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         socket.on('game', function(data) {
             gameState.setInfo(data);
             //console.log(data);
+        });
+
+        
+        socket.on('message', function(data) {
+            var finalMessage = new Array();
+
+            var messageCount = data.message.length;
+            for(var i=0; i< messageCount; i++){
+                var incMessage = {};
+                if(typeof data.message[i].ship != "undefined"){
+                    incMessage.color = Images.ships[gameState.ships[data.message[i].ship].image].color;
+                }
+                incMessage.text = data.message[i].text;
+                finalMessage.push(incMessage);
+            }
+            queue.addMessage(finalMessage);
         });
         
         socket.on('drop', function(data) {
@@ -102,6 +118,11 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
     $('#canvasBox').append(canvas);
     var objects = new Array();
 
+
+    //this will hold all the messages coming in
+    var queue = new MessageQueue(0,canvas.height + 10);
+   
+
     Array.prototype.remove = function(from, to) {
         var rest = this.slice((to || from) + 1 || this.length);
         this.length = from < 0 ? this.length + from : from;
@@ -116,16 +137,16 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         $.each(objects, function(index, value) {
             value.draw(ctx);
         });
-
         
         var smokeCount = smokes.length;
         gameState.draw(ctx, Images);
         for(var i=0; i< smokeCount; i++){
             smokes[i].draw(ctx);
         }
+        queue.draw(ctx);
         if (keysDown['viewStats']) {
             drawStats(ctx);
-        }        
+        }   
     };
 
 
@@ -162,7 +183,8 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         for(var i=0; i< smokeCount; i++){
             smokes[i].update(modifier);
         }
-
+        
+        queue.update(modifier);
         then = now;
     };
 
@@ -185,11 +207,16 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         };
         context.fillStyle = '#FFFFFF';
         context.font = "bold 16px monospace";
-        context.fillText('                Name|' + '  ' + 'kills|' + '  ' + 'death|' + '  ' + 'score|', location.x, location.y);
+        context.fillText('                Name|' + '  ' + 'kills|' + '  ' + 'deaths|' + '  ' + 'score|', location.x, location.y);
         $.each(gameState.ships, function(key, value) {
             location.y += 20;
-            context.fillStyle = value.color;
-            context.fillText(JSON.stringify(value.getStatsInfo()), location.x, location.y);
+            context.fillStyle =  Images.ships[value.image].color;
+            var stats = value.getStatsInfo();
+            var name = S(stats.name).padLeft(20).s;
+            var kills = S(stats.kills).padLeft(7).s;
+            var deaths = S(stats.deaths).padLeft(8).s;
+            var score = S(stats.score).padLeft(7).s;
+            context.fillText(name +'|'+ kills +'|'+ deaths+'|' + score+'|', location.x, location.y);
         });
     };
 });

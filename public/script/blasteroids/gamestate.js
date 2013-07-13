@@ -80,6 +80,11 @@ define(["jquery", './ship'], function($, Ship) {
                                     //console.log(innerValue.name + " destroyed " + value.name);
                                     value.destroy();
                                     innerValue.kills++;
+
+                                    var message = new Array({ship:innerValue.name,text:innerValue.name},{text:' killed '},{ship:value.name,text:value.name},{text:' with bullets'});
+                                    $.each(self.sockets, function(index, value) {
+                                        value.emit('message', {message: message});
+                                    });
                                 }
                             });
                         }
