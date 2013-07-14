@@ -105,6 +105,12 @@ define(["jquery", './ship'], function($, Ship) {
                 then = now;
             };
             setInterval(update, 1);
+        };
+        this.emitMessage = function(message, player){
+            var message = new Array({ship:player, text:player + ': '}, {text:message});
+            $.each(this.sockets, function(index, value) {
+                value.emit('message', {message: message});
+            });
         }
     };
 

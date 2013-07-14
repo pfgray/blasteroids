@@ -24,6 +24,7 @@ TODO:
 - [ ] Make viewing the hitboxes an option for the players
 - [ ] chat feature with other players
 - [ ] make "games" have a limit of certain score
+- [ ] add thruster sound and laser sound when players shoot/thrust
 - [ ] add a laser-sight when players hold "shift" so they can aim easier
 - [ ] Reject duplicate usernames nicely  
 - [ ] fix the score screen  

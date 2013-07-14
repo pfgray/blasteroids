@@ -50,7 +50,11 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
             for(var i=0; i< messageCount; i++){
                 var incMessage = {};
                 if(typeof data.message[i].ship != "undefined"){
-                    incMessage.color = Images.ships[gameState.ships[data.message[i].ship].image].color;
+                    if(data.message[i].ship === "Anonymous"){
+                        incMessage.color = "red";
+                    }else{
+                        incMessage.color = Images.ships[gameState.ships[data.message[i].ship].image].color;
+                    }
                 }
                 incMessage.text = data.message[i].text;
                 finalMessage.push(incMessage);
@@ -106,7 +110,28 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
                 delete keysDown[controls[e.keyCode]];
             }
         }, false);
+
+        //make the chatbox chat:
+        $('#chatsend').click(function(){
+            sendText($('#chatinput').val());
+            $('#chatinput').val('');
+        });
+        $('#chatinput').keydown(function(e){
+            if(e.keyCode == '13'){
+                sendText($('#chatinput').val());
+                $('#chatinput').val('');
+            }
+        });
+        
+        function sendText(text){
+            socket.emit('chatmessage', {
+                'message': text
+            });
+        }
+
     });
+
+    
 
     //canvas stuff
     //add the canvas

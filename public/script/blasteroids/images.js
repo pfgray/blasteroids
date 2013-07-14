@@ -60,6 +60,8 @@ define([], function() {
                 color:"#98FB98"
             },shipDEAD:{
                 normal:imageDEAD
+            },Anonymous:{
+                color:"#98FB98"
             }
         }
     };
