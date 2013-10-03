@@ -1,0 +1,25 @@
+
+
+.gameList{
+    border-radius:5px;
+    background-color:#FFFFFF;
+    padding:50px;
+    border: 1px solid #DDDDDD;
+}
+.game{
+	border-top: 1px solid #BBBBBB;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:10px;
+	padding-right:10px;
+}
+.game:last-child{
+	border-bottom: 1px solid #BBBBBB;
+}
+.game:hover{
+	background-color:#EEEEEE;
+	cursor: pointer;
+}
+.playerCount{
+	float:right;
+}

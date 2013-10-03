@@ -1,0 +1,45 @@
+div.canvasBox{
+    margin: 0 auto;
+    width:1200px;
+    position:relative;
+}
+div.sidebar_left {
+    width: 50%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    color:#FFFFFF;
+}
+div.inputRow{
+    margin:0 auto;
+}
+img{
+    display:block;
+    border-radius: 3px;
+    padding:2px;
+}
+img.highlight{
+    background-color: #4b90c2;
+}
+input.shipColor{
+    display:none;
+}
+label{
+    color:white;
+    display:inline-block;
+    height:auto;
+    width:68px;
+}
+#chatinput{
+    height:100% !important;
+}
+#chatsend{
+    height:100% !important;
+}
+div.textRowRow{
+    height:100%;
+}
+div.textRow{
+    height:50px;
+}

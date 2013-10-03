@@ -22,14 +22,21 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
         //    'token': ship_token
         //});
 
+        
+
         $('#joinGame').click(function() {
             //get the name and the ship color, and emit it on the socket!
             var name = $('#name').val();
+            if(name == ''){
+                alert('Come on now, you have to enter a name!');
+                return;
+            }
             var shipColor = $('input[name=shipColor]:checked').val();
             socket.emit('join', {
                 'name': name, 
                 'shipColor': shipColor
             });
+            $('#ship_options').remove();
         });
 
         socket.emit('watch', {
@@ -139,7 +146,7 @@ require(['blasteroids/gamestate', 'blasteroids/ship', 'blasteroids/star', 'blast
     var ctx = canvas.getContext("2d");
     canvas.width = 1200;
     canvas.height = 600;
-    $('#canvasBox').html('');
+    //$('#canvasBox').html('');
     $('#canvasBox').append(canvas);
     var objects = new Array();
 

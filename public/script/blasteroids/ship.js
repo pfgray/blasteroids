@@ -117,8 +117,10 @@ define(["./point", "./polygon", "./bullet", "jquery"], function(Point, Polygon, 
         };
     
         this.shoot = function(){
-            this.bullets.push(new Bullet(this.x, this.y, this.angle, this.color));
-            this.canShoot = false;
+            if(this.canShoot){
+                this.bullets.push(new Bullet(this.x, this.y, this.angle, this.color));
+                this.canShoot = false;
+            }
         };
     
         this.respawn = function(){

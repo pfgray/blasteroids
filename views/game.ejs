@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blasteroids!</title>
+    <link rel="stylesheet" href="/style/foundation.min.css"/>
+    <script src="/script/foundation.min.js"></script>
+    <link rel="stylesheet" href="/style/blasteroids/blasteroids.css"/>
+    <!--<link rel="stylesheet" href="/style/blasteroids/index.css"/>-->
+    <link rel="stylesheet" href="/style/blasteroids/game.css"/>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//raw.github.com/jprichardson/string.js/master/lib/string.min.js"></script>
+    <script>
+        //var ship_token = "{{token}}";
+        var game_name = "<%= gameName%>";
+        var hostname = '<%= host%>';
+    </script>
+    <script data-main="/script/client" src="/script/require-jquery.js"></script>
+    <script src="/script/index.js"></script>
+</head>
+<body>
+    <% include views/nav %>
+    <div class="row">
+
+    </div>
+    <div id ="canvasBox" class="canvasBox">
+        <div id="ship_options" class="sidebar_left" >
+            <div class="inputRow"><input class="textInput" placeholder="Input name here" name="name" id="name" type="text" value=""/></div>
+            <div class="inputRow">
+                <div id="shipOptions">
+                    <input id="ship1" class="shipColor" type="radio" name="shipColor"  value="ship1" checked="checked"></input><label for="ship1"><img src="/images/ship1.png"/></label>
+                    <input id="ship2" class="shipColor" type="radio" name="shipColor"  value="ship2" ></input><label for="ship2"><img src="/images/ship2.png"/></label>
+                    <input id="ship3" class="shipColor" type="radio" name="shipColor"  value="ship3" ></input><label for="ship3"><img src="/images/ship3.png"/></label>
+                    <input id="ship4" class="shipColor" type="radio" name="shipColor"  value="ship4" ></input><label for="ship4"><img src="/images/ship4.png"/></label>
+                    <input id="ship5" class="shipColor" type="radio" name="shipColor"  value="ship5" ></input><label for="ship5"><img src="/images/ship5.png"/></label>
+                    <input id="ship6" class="shipColor" type="radio" name="shipColor"  value="ship6" ></input><label for="ship6"><img src="/images/ship6.png"></img></label>
+                </div>
+            </div>
+            <button class="accentButton" id="joinGame">Join Game</button>
+        </div>
+
+<!--
+        <div id="connectionInformation" class="connectionInformation">
+            <div class="title">COMING SOON</div>
+        </div>
+    -->
+    </div>
+
+    <div class="row textRow">
+        <div class="large-10 columns textRowRow">
+            <input id="chatinput" type="text">
+        </div>
+        <div class="large-2 columns textRowRow">
+            <button class="accentButton" id="chatsend">Send</button>
+        </div>
+    </div>
+</body>
+</html>

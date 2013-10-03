@@ -1,0 +1,35 @@
+@font-face {
+    font-family: ethnocentric;
+    src: url('/style/fonts/ethnocentric.ttf');
+}
+@font-face {
+    font-family: dimis;
+    src: url('/style/fonts/dimis.ttf');
+}
+@font-face {
+    font-family: dimitri;
+    src: url('/style/fonts/dimitri.ttf');
+}
+@font-face {
+    font-family: coolvetica;
+    src: url('/style/fonts/coolvetica.ttf');
+}
+
+
+span.page_title{
+    font-family: dimitri;
+    font-size: 2em;
+    color:#4b90c2;
+}
+
+body{
+    background-image: url('/images/bg-noise-tile.png') !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.1em;
+}
+
+.button{
+    margin-top:1.5em;
+}

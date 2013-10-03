@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blasteroids!</title>
+        <!--<link rel="stylesheet" href="/style/index.css"/>-->
+        <link rel="stylesheet" href="/style/foundation.min.css"/>
+        <link rel="stylesheet" href="/style/blasteroids/blasteroids.css"/>
+        <link rel="stylesheet" href="/style/blasteroids/gameList.css"/>
+        <script data-main="script/index" src="/script/require-jquery.js"></script>
+        <script src="/script/foundation.min.js"></script>
+    </head>
+    <body>
+        <% include views/nav %>
+        <div class="row">
+            
+            <div class="gameList">
+                <div class="labels">
+                    <% if (Object.keys(games).length < 1) { %>
+                        There are currently no games, click on the button below to make one!
+                    <% } else { %>
+                        Game name: <span class="playerCount">Players:</span>
+                    <% } %>
+                </div>
+                <div>
+                    <% for (var propt in games) { %>
+                    <div class="game">
+                        <a class="listLink" href="/games/<%= games[propt].name%>">
+                            <%= games[propt].name%>: <span class="playerCount"><%= Object.keys(games[propt].ships).length%></span>
+                        </a>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <a href="/createGame" class="button">Create Game</a>
+        </div>
+    </body>
+</html>

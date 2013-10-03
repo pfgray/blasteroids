@@ -1,0 +1,57 @@
+
+div.canvasBox{
+    /*border:1px solid white;*/
+    height:602px;
+    width:1202px;
+    color: white;
+    margin: 0 auto;
+    background-color: #216278;
+}
+div.title{
+    font-family:dimis;
+    color:#E0FF0D;
+    font-size: 50px;
+    margin: 0 auto;
+}
+div.connectionInformation{
+    color: white;
+    width: 50%;
+    height: 50%;
+    margin: 0px auto;
+    margin-top:20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+input.shipColor{
+    display:none;
+}
+div.inputRow{
+    margin:4px;
+}
+body{
+    background-color: #216278;
+    background-image: url('../images/background2.png');
+    padding:0px;
+    margin:0px;
+}
+div.header{
+    background-color:#024E68;
+    background-image: url('../images/header_background.png');
+    background-repeat: repeat-x;
+    /*border-bottom: 2px solid white;*/
+    padding-left: 5px;
+}
+div.content{
+    color:white;
+    font-family: coolvetica;
+    font-size:20px;
+    padding-left: 10px;
+}
+span.section_header{
+    display:block;
+    font-size:35px;
+    font-weight: bold;
+}
+
+
