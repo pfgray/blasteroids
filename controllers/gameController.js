@@ -63,7 +63,7 @@ module.exports = function(app, io, config) {
             if (err) {
                 return console.log(err);
             } else {
-                res.send(ejs.render(data));
+                res.send(ejs.render(data, {filename: __dirname + '/../views/createGame.ejs'}));
             }
         });
     });
@@ -74,7 +74,7 @@ module.exports = function(app, io, config) {
                 if (err) {
                     return console.log(err);
                 } else {
-                    res.send(ejs.render(data));
+                    res.send(ejs.render(data, {filename: __dirname + '/../views/createGame.ejs'}));
                 }
             });
         } else {
@@ -91,7 +91,7 @@ module.exports = function(app, io, config) {
             if (err) {
                 return console.log(err);
             } else {
-                res.send(ejs.render(data, {gameName: gameId, host:req.headers.host}));
+                res.send(ejs.render(data, {gameName: gameId, host:req.headers.host, filename: __dirname + '/../views/game.ejs'}));
             }
         });
     });
@@ -105,7 +105,7 @@ module.exports = function(app, io, config) {
                 if(games["test"] && games["test"].ships){
                    console.log("****" + JSON.stringify(games["test"].ships));
                 }
-                res.send(ejs.render(data, {games: games}));
+                res.send(ejs.render(data, {games: games, filename: __dirname + '/../views/gameList.ejs'}));
             }
         });
     });

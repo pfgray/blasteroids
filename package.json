@@ -1,0 +1,40 @@
+{
+  "name": "blasteroids",
+  "version": "1.0.0",
+  "description": "an asteroids-like html5 game running on websockets",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "~0.8.4",
+    "express": "~3.2.5",
+    "handlebars": "~1.0.12",
+    "jquery": "~1.8.3",
+    "mustache": "~0.7.2",
+    "requirejs": "~2.1.6",
+    "socket.io": "~0.9.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pfgray/blasteroids.git"
+  },
+  "keywords": [
+    "html5",
+    "asteroids",
+    "real-time",
+    "game",
+    "shooter",
+    "websocket",
+    "node",
+    "javascript"
+  ],
+  "author": "Paul Gray",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "9c047c985f6e8ac47b7a6b51753e6ca55a01ca7b",
+  "bugs": {
+    "url": "https://github.com/pfgray/blasteroids/issues"
+  }
+}

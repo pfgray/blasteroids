@@ -26,7 +26,7 @@ requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestat
     
     app.get('/', function(req, res) {
         fs.readFile('views/index.ejs', 'utf8', function(err, data){
-            res.send(ejs.render(data, {}));
+            res.send(ejs.render(data, {filename: __dirname + '/views/index.ejs'}));
         });
     });
 
