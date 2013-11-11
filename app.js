@@ -2,7 +2,7 @@
 
 var requirejs = require('requirejs');
 var Mustache = require('mustache');
-var config = require('config')
+var config = require('./config')
 
 requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestate'], function(Ship, GameState) {
 
@@ -19,7 +19,7 @@ requirejs(['public/script/blasteroids/ship', 'public/script/blasteroids/gamestat
     var path = require('path');
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.bodyParser());
-    var gameController = require('gameController.js')(app, io, config);//(app);
+    var gameController = require('./controllers/gameController.js')(app, io, config);//(app);
 
     var GAMESTATE_HEARTBEAT_INTERVAL = 5;//in ms
 
