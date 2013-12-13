@@ -6,11 +6,11 @@ an asteroids-like html5 game running on websockets
 
 How to run:
 -----------
-Step  1. cd to blasteroids/
-Step  2. run: npm install
-Step  3. run: sudo node app.js
-Step  4. open browser to: localhost
-Step  5. Click "View Games", then "Create Game"
+Step  1. cd to blasteroids/  
+Step  2. run: npm install  
+Step  3. run: sudo node app.js  
+Step  4. open browser to: localhost  
+Step  5. Click "View Games", then "Create Game"  
 Step  6. enter username and select ship, click 'Join Game'  
 Step  7. open another browser to localhost:1337/  
 Step  8. enter a different username and click 'Join Game'  
