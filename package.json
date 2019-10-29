@@ -7,7 +7,7 @@
     "ejs": "~0.8.4",
     "express": "~3.2.5",
     "handlebars": "~1.0.12",
-    "jquery": "~1.8.3",
+    "jquery": "~3.0.0",
     "mustache": "~0.7.2",
     "requirejs": "~2.1.6",
     "socket.io": "~0.9.14"
